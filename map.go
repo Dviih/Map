@@ -54,3 +54,7 @@ func (_map *Map[K, V]) Delete(key K) {
 	_map.m.Delete(key)
 }
 
+func (_map *Map[K, V]) Clear() {
+	_map.m.Clear()
+}
+
