@@ -24,6 +24,11 @@ import (
 	"sync"
 )
 
+type KV[K comparable, V interface{}] struct {
+	Key   K
+	Value V
+}
+
 type Map[K comparable, V interface{}] struct {
 	m sync.Map
 }
