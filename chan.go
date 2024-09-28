@@ -26,3 +26,20 @@ type Chan[K comparable, V interface{}] struct {
 	closed bool
 }
 
+func (_chan *Chan[K, V]) Send(key K, value V) {
+	if _chan.closed {
+		return
+	}
+
+	if _chan.sender == nil {
+		_chan.sender = make(chan *KV[K, V])
+	}
+
+	_chan.m.Store(key, value)
+
+	_chan.sender <- &KV[K, V]{
+		Key:   key,
+		Value: value,
+	}
+}
+
