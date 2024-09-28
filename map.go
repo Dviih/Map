@@ -58,3 +58,12 @@ func (_map *Map[K, V]) Clear() {
 	_map.m.Clear()
 }
 
+func (_map *Map[K, V]) Swap(key K, value V) (V, error) {
+	v, ok := _map.m.Swap(key, value)
+	if !ok {
+		return _map.zero(), KeyNotFound
+	}
+
+	return v.(V), nil
+}
+
