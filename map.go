@@ -93,3 +93,9 @@ func (_map *Map[K, V]) CompareAndDelete(key K, value V) bool {
 	return _map.m.CompareAndDelete(key, value)
 }
 
+func (_map *Map[K, V]) Range(fn func(K, V) bool) {
+	_map.m.Range(func(k, v any) bool {
+		return fn(k.(K), v.(V))
+	})
+}
+
