@@ -43,3 +43,26 @@ func (_chan *Chan[K, V]) Send(key K, value V) {
 	}
 }
 
+func (_chan *Chan[K, V]) Receive() <-chan *KV[K, V] {
+	if _chan.closed {
+		return nil
+	}
+
+	if _chan.sender == nil {
+		_chan.sender = make(chan *KV[K, V])
+	}
+
+	c := make(chan *KV[K, V])
+
+	go func() {
+		for {
+			select {
+			case data := <-_chan.sender:
+				c <- data
+			}
+		}
+	}()
+
+	return c
+}
+
