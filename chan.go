@@ -75,6 +75,10 @@ func (_chan *Chan[K, V]) Close() {
 	_chan.closed = true
 }
 
+func (_chan *Chan[K, V]) Load(key K) (V, error) {
+	return _chan.m.Load(key)
+}
+
 func (_chan *Chan[K, V]) Map() map[K]V {
 	return _chan.m.Map()
 }
