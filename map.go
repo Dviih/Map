@@ -99,3 +99,14 @@ func (_map *Map[K, V]) Range(fn func(K, V) bool) {
 	})
 }
 
+func (_map *Map[K, V]) Map() map[K]V {
+	m := make(map[K]V)
+
+	_map.Range(func(k K, v V) bool {
+		m[k] = v
+		return true
+	})
+
+	return m
+}
+
