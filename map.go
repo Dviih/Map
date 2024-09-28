@@ -24,3 +24,7 @@ import (
 	"sync"
 )
 
+type Map[K comparable, V interface{}] struct {
+	m sync.Map
+}
+
