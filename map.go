@@ -37,3 +37,12 @@ func (_map *Map[K, V]) zero() V {
 	return value
 }
 
+func (_map *Map[K, V]) Load(key K) (V, error) {
+	v, ok := _map.m.Load(key)
+	if !ok {
+		return _map.zero(), KeyNotFound
+	}
+
+	return v.(V), nil
+}
+
