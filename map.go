@@ -32,3 +32,8 @@ var (
 	KeyNotFound = errors.New("key not found")
 )
 
+func (_map *Map[K, V]) zero() V {
+	var value V
+	return value
+}
+
