@@ -66,3 +66,11 @@ func (_chan *Chan[K, V]) Receive() <-chan *KV[K, V] {
 	return c
 }
 
+func (_chan *Chan[K, V]) Close() {
+	if _chan.closed || _chan.sender == nil {
+		return
+	}
+
+	close(_chan.sender)
+	_chan.closed = true
+}
