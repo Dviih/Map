@@ -28,3 +28,7 @@ type Map[K comparable, V interface{}] struct {
 	m sync.Map
 }
 
+var (
+	KeyNotFound = errors.New("key not found")
+)
+
