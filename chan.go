@@ -74,3 +74,11 @@ func (_chan *Chan[K, V]) Close() {
 	close(_chan.sender)
 	_chan.closed = true
 }
+
+func (_chan *Chan[K, V]) Map() map[K]V {
+	return _chan.m.Map()
+}
+
+func (_chan *Chan[K, V]) Len() int {
+	return _chan.m.Len()
+}
