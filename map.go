@@ -85,3 +85,11 @@ func (_map *Map[K, V]) LoadAndDelete(key K) (V, error) {
 	return v.(V), nil
 }
 
+func (_map *Map[K, V]) CompareAndSwap(key K, old, new V) bool {
+	return _map.m.CompareAndSwap(key, old, new)
+}
+
+func (_map *Map[K, V]) CompareAndDelete(key K, value V) bool {
+	return _map.m.CompareAndDelete(key, value)
+}
+
