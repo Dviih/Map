@@ -113,7 +113,7 @@ func (_map *Map[K, V]) Map() map[K]V {
 func (_map *Map[K, V]) Len() int {
 	i := 0
 
-	_map.Range(func(k K, _ V) bool {
+	_map.Range(func(_ K, _ V) bool {
 		i++
 		return true
 	})
