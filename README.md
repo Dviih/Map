@@ -5,7 +5,13 @@
 ---
 
 ## Map
-### Implemented on top of `sync.Map` with more methods.
+### Implemented on top of `sync.Map` with more methods
+
+## Chan
+### Extended of `Map` with channel logic
+
+## KV
+### Underlying structure for channel representation
 
 ---
 
@@ -22,6 +28,14 @@
 - `CompareAndSwap` - Compares a value and if matches swap it.
 - `CompareAndDelete` - Compares a value and if it matches delete it.
 - `Range` - Ranges through all keys of the map.
+- `Map` - Returns a `map[K]V`.
+- `Len` - Returns the length of the map.
+
+## Chan
+- `Send` - Sends a key as a value to the map.
+- `Receive` - Receives key and value from the map.
+- `Close` - Closes the map channel.
+- `Load` - Loads a key from the map.
 - `Map` - Returns a `map[K]V`.
 - `Len` - Returns the length of the map.
 
