@@ -50,3 +50,7 @@ func (_map *Map[K, V]) Store(key K, value V) {
 	_map.m.Store(key, value)
 }
 
+func (_map *Map[K, V]) Delete(key K) {
+	_map.m.Delete(key)
+}
+
