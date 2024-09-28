@@ -46,3 +46,7 @@ func (_map *Map[K, V]) Load(key K) (V, error) {
 	return v.(V), nil
 }
 
+func (_map *Map[K, V]) Store(key K, value V) {
+	_map.m.Store(key, value)
+}
+
