@@ -19,11 +19,13 @@
 
 package Map
 
+import "github.com/Dviih/Channel"
+
 type Chan[K comparable, V interface{}] struct {
 	m Map[K, V]
 
-	sender chan *KV[K, V]
-	closed bool
+	channel *Channel.Channel[*KV[K, V]]
+	closed  bool
 }
 
 func (_chan *Chan[K, V]) Send(key K, value V) {
@@ -31,13 +33,9 @@ func (_chan *Chan[K, V]) Send(key K, value V) {
 		return
 	}
 
-	if _chan.sender == nil {
-		_chan.sender = make(chan *KV[K, V])
-	}
-
 	_chan.m.Store(key, value)
 
-	_chan.sender <- &KV[K, V]{
+	_chan.channel.Sender() <- &KV[K, V]{
 		Key:   key,
 		Value: value,
 	}
@@ -48,30 +46,14 @@ func (_chan *Chan[K, V]) Receive() <-chan *KV[K, V] {
 		return nil
 	}
 
-	if _chan.sender == nil {
-		_chan.sender = make(chan *KV[K, V])
-	}
-
-	c := make(chan *KV[K, V])
-
-	go func() {
-		for {
-			select {
-			case data := <-_chan.sender:
-				c <- data
-			}
-		}
-	}()
-
-	return c
+	return _chan.channel.Receiver()
 }
 
 func (_chan *Chan[K, V]) Close() {
-	if _chan.closed || _chan.sender == nil {
+	if _chan.closed {
 		return
 	}
 
-	close(_chan.sender)
 	_chan.closed = true
 }
 
@@ -89,4 +71,10 @@ func (_chan *Chan[K, V]) Map() map[K]V {
 
 func (_chan *Chan[K, V]) Len() int {
 	return _chan.m.Len()
+}
+
+func NewChan[K comparable, V interface{}](options ...Channel.Option) *Chan[K, V] {
+	return &Chan[K, V]{
+		channel: Channel.New[*KV[K, V]](options...),
+	}
 }
