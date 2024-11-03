@@ -19,11 +19,13 @@
 
 package Map
 
+import "github.com/Dviih/Channel"
+
 type Chan[K comparable, V interface{}] struct {
 	m Map[K, V]
 
-	sender chan *KV[K, V]
-	closed bool
+	channel *Channel.Channel[*KV[K, V]]
+	closed  bool
 }
 
 func (_chan *Chan[K, V]) Send(key K, value V) {
