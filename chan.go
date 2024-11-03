@@ -72,3 +72,9 @@ func (_chan *Chan[K, V]) Map() map[K]V {
 func (_chan *Chan[K, V]) Len() int {
 	return _chan.m.Len()
 }
+
+func NewChan[K comparable, V interface{}](options ...Channel.Option) *Chan[K, V] {
+	return &Chan[K, V]{
+		channel: Channel.New[*KV[K, V]](options...),
+	}
+}
