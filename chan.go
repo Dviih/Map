@@ -79,6 +79,10 @@ func (_chan *Chan[K, V]) Load(key K) (V, error) {
 	return _chan.m.Load(key)
 }
 
+func (_chan *Chan[K, V]) Delete(key K) {
+	_chan.m.Delete(key)
+}
+
 func (_chan *Chan[K, V]) Map() map[K]V {
 	return _chan.m.Map()
 }
