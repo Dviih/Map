@@ -36,6 +36,7 @@
 - `Receive` - Receives key and value from the map.
 - `Close` - Closes the map channel.
 - `Load` - Loads a key from the map.
+- `Delete` - Deletes a key from the map.
 - `Map` - Returns a `map[K]V`.
 - `Len` - Returns the length of the map.
 
