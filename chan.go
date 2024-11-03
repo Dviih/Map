@@ -46,18 +46,7 @@ func (_chan *Chan[K, V]) Receive() <-chan *KV[K, V] {
 		return nil
 	}
 
-	c := make(chan *KV[K, V])
-
-	go func() {
-		for {
-			select {
-			case data := <-_chan.sender:
-				c <- data
-			}
-		}
-	}()
-
-	return c
+	return _chan.channel.Receiver()
 }
 
 func (_chan *Chan[K, V]) Close() {
