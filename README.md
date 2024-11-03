@@ -50,7 +50,7 @@ import (
 )
 
 func main() {
-	m := Map.Map[string, int]{}
+	m := Map.New[string, int]()
 	
 	m.Store("one", 1)
 	
