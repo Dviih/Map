@@ -125,3 +125,7 @@ func (_map *Map[K, V]) Len() int {
 
 	return i
 }
+
+func New[K comparable, V interface{}]() *Map[K, V] {
+	return &Map[K, V]{}
+}
