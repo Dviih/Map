@@ -63,15 +63,6 @@ func (_map *Map[K, V]) Clear() {
 	_map.m.Clear()
 }
 
-func (_map *Map[K, V]) Swap(key K, value V) (V, error) {
-	v, ok := _map.m.Swap(key, value)
-	if !ok {
-		return _map.zero(), KeyNotFound
-	}
-
-	return v.(V), nil
-}
-
 func (_map *Map[K, V]) LoadOrStore(key K, value V) (V, error) {
 	v, ok := _map.m.LoadOrStore(key, value)
 	if !ok {
@@ -88,14 +79,6 @@ func (_map *Map[K, V]) LoadAndDelete(key K) (V, error) {
 	}
 
 	return v.(V), nil
-}
-
-func (_map *Map[K, V]) CompareAndSwap(key K, old, new V) bool {
-	return _map.m.CompareAndSwap(key, old, new)
-}
-
-func (_map *Map[K, V]) CompareAndDelete(key K, value V) bool {
-	return _map.m.CompareAndDelete(key, value)
 }
 
 func (_map *Map[K, V]) Range(fn func(K, V) bool) {
