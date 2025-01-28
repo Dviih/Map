@@ -4,6 +4,11 @@
 
 ---
 
+# Deprecation notice
+### This project was moved to [sync](https://github.com/Dviih/sync) as `sync.Map[K, V]`.
+
+---
+
 ## Map
 ### Implemented on top of `sync.Map` with more methods
 
